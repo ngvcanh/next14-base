@@ -17,6 +17,8 @@ export class Router {
 
   private _prefix: string = "";
 
+  private stacks: Array<RouteHandler[]> = [];
+
   constructor(prefix = "") {
     this._prefix = prefix;
   }
@@ -62,6 +64,14 @@ export class Router {
 
     this._endpoints[method]!.push(new RouteLayer(pathname, handler));
     return this;
+  }
+
+  private dispatch(req: RouteRequest, res: RouteResponse, done: Function) {
+    let idx = 0;
+    let sync = 0;
+
+    const stacks = this.stacks;
+
   }
 
   use() {
